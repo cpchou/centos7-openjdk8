@@ -5,9 +5,14 @@ RUN yum update -y
 RUN yum install -y tzdata
 RUN ln -fs /usr/share/zoneinfo/Asia/Taipei /etc/localtime
 
-RUN yum install -y locales
-RUN locale-gen zh_TW.UTF-8
-RUN update-locale
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+  && yum -y install kde-l10n-Chinese \
+  && yum -y reinstall glibc-common \
+  && localedef -c -f UTF-8 -i zh_CW zh_TW.UTF-8 \
+  && echo 'LANG="zh_TW.UTF-8"' > /etc/locale.conf \
+  && source /etc/locale.conf \
+  && yum clean all 
+    
 RUN echo 'export LANGUAGE="zh_TW.UTF-8"' >> /root/.bashrc
 RUN echo 'export LANG="zh_TW.UTF-8"' >> /root/.bashrc
 RUN echo 'export LC_ALL="zh_TW.UTF-8"' >> /root/.bashrc
