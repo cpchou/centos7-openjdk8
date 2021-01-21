@@ -3,12 +3,12 @@ FROM library/centos:7
 RUN yum update -y
 
 RUN yum install -y tzdata
-RUN ln -fs /usr/share/zoneinfo/Asia/Taipei /etc/localtime
+#RUN ln -fs /usr/share/zoneinfo/Asia/Taipei /etc/localtime
 
-RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+RUN ln -sf /usr/share/zoneinfo/Asia/Taipei /etc/localtime \
   && yum -y install kde-l10n-Chinese \
   && yum -y reinstall glibc-common \
-  && localedef -c -f UTF-8 -i zh_CW zh_TW.UTF-8 \
+  && localedef -c -f UTF-8 -i zh_TW zh_TW.UTF-8 \
   && echo 'LANG="zh_TW.UTF-8"' > /etc/locale.conf \
   && source /etc/locale.conf \
   && yum clean all 
