@@ -57,13 +57,17 @@ RUN wget http://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/ap
   mv apache-maven-$MAVEN_VERSION /usr/lib/mvn
 
 # ttf-mscorefonts-installer安裝
-RUN apt update
-RUN echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections
-RUN yum install -y ttf-mscorefonts-installer
+RUN yum update -y
+#RUN echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections
+#RUN yum install -y ttf-mscorefonts-installer
+
+RUN yum install -y curl cabextract xorg-x11-font-utils fontconfig
+RUN yum install -y https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
 
 #安裝字型
 RUN yum install -y fontconfig
 RUN fc-cache -f -v
+RUN mkdir -p /usr/share/fonts/truetype
 RUN cd /usr/share/fonts/truetype
 #全字庫正楷體
 RUN wget https://cpchou0701.diskstation.me/fonts/TW-Kai-98_1.ttf
