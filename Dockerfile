@@ -28,6 +28,9 @@ RUN yum install -y wget
 RUN yum install -y gzip
 RUN yum install -y unzip
 
+RUN wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+RUN yum install -y  epel-release-latest-7.noarch.rpm
+
 RUN wget https://github.com/ojdkbuild/contrib_jdk8u-ci/releases/download/jdk8u212-b04/jdk-8u212-ojdkbuild-linux-x64.zip
 RUN ln -sf  /jdk-8u212-ojdkbuild-linux-x64 /opt/jdk
 RUN cd /opt
