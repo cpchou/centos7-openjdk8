@@ -1,7 +1,6 @@
 FROM library/centos:7
 
-RUN yum update
-RUN yum upgrade
+RUN yum update -y
 
 RUN yum install -y tzdata
 RUN ln -fs /usr/share/zoneinfo/Asia/Taipei /etc/localtime
@@ -18,7 +17,7 @@ ENV LANGUAGE zh_TW.UTF-8
 ENV LC_ALL zh_TW.UTF-8
 ENV TZ Asia/Taipei
 
-RUN yum update
+RUN yum update -y
 RUN yum install -y curl
 RUN yum install -y wget
 RUN yum install -y gzip
